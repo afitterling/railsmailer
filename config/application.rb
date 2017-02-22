@@ -22,5 +22,12 @@ module Railsbaseapp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_mailer.smtp_settings = {
+      address: ENV["SMTP_ADDRESS"],
+      port: ENV["SMTP_PORT"],
+      user_name: ENV["SMTP_USER_NAME"],
+      password: ENV["SMTP_PASSWORD"]
+    }
   end
 end

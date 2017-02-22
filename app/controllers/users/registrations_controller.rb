@@ -3,6 +3,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user = User.new(user_params)
 
     if user.save
+      UserMailer.welcome_email(user.email).deliver_later
+
       access_token = user.access_tokens.create
       render json: {
         access_token: access_token,
