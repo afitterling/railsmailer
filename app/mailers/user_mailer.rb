@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'bla@yihangho.com'
+  default from: ENV['DEFAULT_SENDER']
 
   def welcome_email(email)
     mail(to: email, subject: "Welcome!")
