@@ -12,4 +12,5 @@ COPY . .
 
 EXPOSE 3000
 
+RUN bin/torquebox deploy .
 CMD ["bin/torquebox", "run", "-b", "0.0.0.0", "-p", "3000"]
