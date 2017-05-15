@@ -12,4 +12,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["rails", "server", "--bind=0.0.0.0", "--port=3000", "--pid=/tmp/server.pid"]
+CMD ["bin/torquebox", "run", "-b", "0.0.0.0", "-p", "3000"]
