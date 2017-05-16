@@ -11,7 +11,7 @@ class Github < Sinatra::Base
     end
 
     json = JSON.parse(request.body.read)
-    unless json["ref"] == "refs/heads/#{TARGET_BRANCH}"
+    unless json["ref"] == "refs/heads/#{target_branch}"
       return 204
     end
 
