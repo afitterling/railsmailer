@@ -16,7 +16,7 @@ class Github < Sinatra::Base
     end
 
     FileUtils.cd(repo_path)
-    pid = Process.spawn("bundle exec rake deploy")
+    pid = Process.spawn("bin/rake deploy")
     Process.detach(pid)
 
     204
