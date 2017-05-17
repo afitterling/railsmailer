@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517141718) do
+ActiveRecord::Schema.define(version: 20170517143717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20170517141718) do
   end
 
   add_index "access_tokens", ["user_id"], name: "index_access_tokens_on_user_id", using: :btree
+
+  create_table "device_access_tokens", force: :cascade do |t|
+    t.string   "token"
+    t.integer  "sequence"
+    t.integer  "device_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "device_access_tokens", ["device_id"], name: "index_device_access_tokens_on_device_id", using: :btree
+  add_index "device_access_tokens", ["token"], name: "index_device_access_tokens_on_token", unique: true, using: :btree
 
   create_table "devices", force: :cascade do |t|
     t.integer  "last_used_key_sequence", default: -1, null: false
@@ -41,4 +52,5 @@ ActiveRecord::Schema.define(version: 20170517141718) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "access_tokens", "users"
+  add_foreign_key "device_access_tokens", "devices"
 end
