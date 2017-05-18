@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517143717) do
+ActiveRecord::Schema.define(version: 20170518142027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170517143717) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "log_data", force: :cascade do |t|
+    t.integer  "device_id"
+    t.json     "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "log_data", ["device_id"], name: "index_log_data_on_device_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",              default: "", null: false
     t.string   "encrypted_password", default: "", null: false
@@ -53,4 +62,5 @@ ActiveRecord::Schema.define(version: 20170517143717) do
 
   add_foreign_key "access_tokens", "users"
   add_foreign_key "device_access_tokens", "devices"
+  add_foreign_key "log_data", "devices"
 end

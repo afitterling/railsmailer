@@ -21,4 +21,16 @@ RSpec.describe Device, type: :model do
       expect(@device.current_valid_token).to eq @tokens.first
     end
   end
+
+  describe "device access token" do
+    it "should be accessible through accessor" do
+      expect(@device).to respond_to :device_access_tokens
+    end
+  end
+
+  describe "log data" do
+    it "should be accessible through log data" do
+      expect(@device).to respond_to :log_data
+    end
+  end
 end
