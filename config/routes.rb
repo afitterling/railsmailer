@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   }
 
   resources :devices, only: :create
+  resources :log_data, only: [:index, :create, :show]
 
   mount Github.new => "/webhooks/github"
 end
