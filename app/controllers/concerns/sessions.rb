@@ -6,7 +6,14 @@ module Sessions
   end
 
   def access_token
-    @access_token ||= AccessToken.find_by(token: raw_access_token)
+    return @access_token if @access_token
+
+    device_access_token = DeviceAccessToken.find_by(token: raw_access_token)
+    if device_access_token && device_access_token == device_access_token.device.current_valid_token
+      @access_token = device_access_token
+    else
+      @access_token = AccessToken.find_by(token: raw_access_token)
+    end
   end
 
   def require_access_token
