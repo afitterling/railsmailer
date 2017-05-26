@@ -30,6 +30,11 @@ module Sessions
     return render_invalid_access_token unless access_token
   end
 
+  def require_user_access_token
+    return render_no_access_token unless raw_access_token
+    return render_invalid_access_token unless current_user
+  end
+
   def require_device_access_token
     return render_no_access_token unless raw_access_token
     return render_invalid_access_token unless current_device
