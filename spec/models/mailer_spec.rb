@@ -49,8 +49,6 @@ RSpec.describe Mailer, type: :model do
     it "should decrypt encrypted_password" do
       plaintext_password = "hello_world"
       @mailer = create(:mailer, password: plaintext_password)
-      # @mailer.password = plaintext_password
-      # @mailer.save!
 
       reloaded_mailer = Mailer.find(@mailer.id)
       expect(reloaded_mailer.password).to eq plaintext_password
@@ -64,6 +62,28 @@ RSpec.describe Mailer, type: :model do
       reloaded_mailer.attributes.each do |_, value|
         expect(value).not_to eq plaintext_password
       end
+    end
+  end
+
+  describe "action_mailer_config" do
+    it "should be accessible through the accessor method" do
+      expect(@mailer).to respond_to(:action_mailer_config)
+    end
+
+    it "should return a hash that can be used to configure ActionMailer" do
+      config = {
+        address: "address.example.com",
+        port: 1234,
+        domain: "domain.example.com",
+        user_name: "user_name",
+        password: "password",
+        authentication: :plain,
+        enable_starttls_auto: false,
+        openssl_verify_mode: 'peer'
+      }
+
+      @mailer = create(:mailer, config)
+      expect(@mailer.action_mailer_config).to eq config
     end
   end
 end
