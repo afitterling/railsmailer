@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526064024) do
+ActiveRecord::Schema.define(version: 20170611104803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,20 @@ ActiveRecord::Schema.define(version: 20170526064024) do
   end
 
   add_index "log_data", ["device_id"], name: "index_log_data_on_device_id", using: :btree
+
+  create_table "mailers", force: :cascade do |t|
+    t.string   "address",               default: "localhost", null: false
+    t.integer  "port",                  default: 25,          null: false
+    t.string   "domain"
+    t.string   "user_name"
+    t.string   "encrypted_password"
+    t.string   "encrypted_password_iv"
+    t.integer  "authentication"
+    t.boolean  "enable_starttls_auto",  default: true,        null: false
+    t.string   "openssl_verify_mode"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",              default: "", null: false
