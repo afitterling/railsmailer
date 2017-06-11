@@ -8,8 +8,9 @@ RSpec.describe "CreateMailer", type: :request do
 
   describe "POST /mailers" do
     it "should return 200 if valid access token is provided" do
+      expect(Mailer.find_by(uid: 'uid')).to be_nil
       expect do
-        post mailers_path, nil, "X-Access-Token" => @access_token.token
+        post mailers_path, {uid: 'uid'}, "X-Access-Token" => @access_token.token
         expect(response).to have_http_status(:ok)
       end.to change { Mailer.count }.by(1)
     end

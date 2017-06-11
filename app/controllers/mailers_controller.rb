@@ -15,6 +15,7 @@ class MailersController < ApplicationController
 
   def mailer_params
     params.permit(:address, :port, :domain, :user_name, :password,
-                  :authentication, :enable_starttls_auto, :openssl_verify_mode)
+                  :authentication, :enable_starttls_auto, :openssl_verify_mode,
+                  :uid)
   end
 end

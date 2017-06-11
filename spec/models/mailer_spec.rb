@@ -65,6 +65,20 @@ RSpec.describe Mailer, type: :model do
     end
   end
 
+  describe "uid" do
+    it "should be present" do
+      @mailer.uid = ''
+      expect(@mailer).not_to be_valid
+    end
+
+    it "should be unique" do
+      other_mailer = create(:mailer)
+      expect(other_mailer).to be_valid
+      other_mailer.uid = @mailer.uid
+      expect(other_mailer).not_to be_valid
+    end
+  end
+
   describe "action_mailer_config" do
     it "should be accessible through the accessor method" do
       expect(@mailer).to respond_to(:action_mailer_config)

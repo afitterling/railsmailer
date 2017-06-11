@@ -2,6 +2,8 @@ class Mailer < ActiveRecord::Base
   enum authentication: [:plain, :login, :cram_md5]
   attr_encrypted :password, key: Rails.configuration.encryption_key
 
+  validates :uid, presence: true, uniqueness: true
+
   def action_mailer_config
     {
       address: address,
