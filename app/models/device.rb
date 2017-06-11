@@ -1,4 +1,5 @@
 class Device < ActiveRecord::Base
+  belongs_to :user
   has_many :device_access_tokens, dependent: :destroy
   has_many :log_data, dependent: :destroy
 

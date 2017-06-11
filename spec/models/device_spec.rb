@@ -2,9 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Device, type: :model do
   before(:each) do
-    @device = Device.create!
-    @tokens = (0..4).map do |seq|
-      @device.device_access_tokens.create!(sequence: seq)
+    @device = create(:device)
+    @tokens = (0..4).map { |seq| create(:device_access_token, device: @device, sequence: seq) }
+  end
+
+  describe "default factory object" do
+    it "should be valid" do
+      expect(@device).to be_valid
+    end
+  end
+
+  describe "user" do
+    it "should be accessible through accessor method" do
+      expect(@device).to respond_to :user
     end
   end
 
