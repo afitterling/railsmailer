@@ -35,6 +35,7 @@ gem 'torquebox-server', '3.2.0'
 
 gem 'devise'
 gem 'sinatra', '1.4.8'
+gem 'attr_encrypted', '~> 3.0.3'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
